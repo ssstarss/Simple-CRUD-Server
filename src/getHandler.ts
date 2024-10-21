@@ -1,9 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { usersDB } from './usersDB';
 
-export const getHandler = (req: IncomingMessage, res: ServerResponse) => {
+const getHandler = (req: IncomingMessage, res: ServerResponse) => {
   const userID = req.url?.slice(11);
-  console.log('ID', userID);
   if (userID) {
     try {
       let result;
@@ -36,6 +35,8 @@ export const getHandler = (req: IncomingMessage, res: ServerResponse) => {
     }
   } else {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(usersDB));
+    res.end(JSON.stringify(usersDB.users));
   }
 };
+
+export default getHandler;

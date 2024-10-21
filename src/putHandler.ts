@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { User, usersDB } from './usersDB';
 
-export const putHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
+const putHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   const userID = req.url?.slice(11);
   if (userID) {
     try {
@@ -38,3 +38,5 @@ export const putHandler = (req: IncomingMessage, res: ServerResponse, data: User
     }
   }
 };
+
+export default putHandler;

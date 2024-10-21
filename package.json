@@ -8,15 +8,10 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --ext .ts --fix",
-    "clean": "rimraf ./build",
+    "clean": "rimraf ./dist",
     "build": "npm run clean && tsc",
-    "start": "node src",
-    "local": "ts-node src",
-    "local:watch": "nodemon --exec ts-node src/index.ts"
-  },
-  "directories": {
-    "src": "./src",
-    "test": "./test"
+    "start:dev": "nodemon --exec ts-node ./src/index.ts",
+    "start:prod": "npm run build && node ./dist/index.js"
   },
   "targets": {
     "default": {

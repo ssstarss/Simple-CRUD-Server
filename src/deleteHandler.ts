@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { usersDB } from './usersDB';
 
-export const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
+const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
   const userID = req.url?.slice(11);
   if (userID) {
     try {
@@ -38,3 +38,5 @@ export const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
     res.end(JSON.stringify(usersDB));
   }
 };
+
+export default deleteHandler;

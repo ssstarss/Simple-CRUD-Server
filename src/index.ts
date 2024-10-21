@@ -1,15 +1,16 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
-import { requestHandler } from './requestHandler';
 import * as dotenv from 'dotenv';
-dotenv.config()
+import requestHandler from './requestHandler';
+
+dotenv.config();
 
 const server = createServer((req: IncomingMessage, res: ServerResponse) => {
   let data: string = '';
+
   req.on('data', (chunk) => {
     data += chunk;
     req.on('end', () => {
       try {
-        const user = JSON.parse(data);
         requestHandler(req, res, JSON.parse(data));
       } catch (err) {
         if (err instanceof Error) {

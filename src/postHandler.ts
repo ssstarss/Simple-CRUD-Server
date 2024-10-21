@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { User, usersDB } from './usersDB';
 
-export const postHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
+const postHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   const result = usersDB.adduser(data);
   if (result) {
     res.writeHead(result.status, { 'Content-Type': 'application/json' });
@@ -9,3 +9,4 @@ export const postHandler = (req: IncomingMessage, res: ServerResponse, data: Use
     if (result.status === 200) res.end(JSON.stringify(result.newUser));
   }
 };
+export default postHandler;

@@ -7,34 +7,28 @@ export type User = {
 
 class UsersDB {
   users: User[];
+
   constructor() {
     this.users = [];
   }
+
   adduser(user: User) {
-    console.log('User:', user, typeof user.age);
     if (
       typeof user.username === 'string' &&
       typeof user.age === 'number' &&
       Array.isArray(user.hobbies)
     ) {
-      console.log('11111');
       const id = crypto.randomUUID();
-      console.log(id);
       const newUser = {
-        id: id,
+        id,
         username: user.username,
         age: user.age,
         hobbies: user.hobbies,
       };
       this.users.push(newUser);
       return { newUser, status: 200 };
-    } else console.log('222');
+    }
     return { newUser: {}, status: 400, message: 'Request body does not contain required fields' };
-  }
-
-  deleteUser(user:User){
-    
-
   }
 }
 export const usersDB = new UsersDB();

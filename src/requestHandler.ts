@@ -1,12 +1,11 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { postHandler } from './postHandler';
+import postHandler from './postHandler';
 import { User } from './usersDB';
-import { getHandler } from './getHandler';
-import { deleteHandler } from './deleteHandler';
-import { putHandler } from './putHandler';
+import getHandler from './getHandler';
+import deleteHandler from './deleteHandler';
+import putHandler from './putHandler';
 
-export const requestHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
-  let user;
+const requestHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   if (req.url?.startsWith('/api/users')) {
     switch (req.method) {
       case 'GET': {
@@ -25,6 +24,14 @@ export const requestHandler = (req: IncomingMessage, res: ServerResponse, data: 
         putHandler(req, res, data);
         break;
       }
+      default: {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(
+          JSON.stringify({
+            message: 'Invalid endpoint given',
+          })
+        );
+      }
     }
   } else {
     res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -35,3 +42,5 @@ export const requestHandler = (req: IncomingMessage, res: ServerResponse, data: 
     );
   }
 };
+
+export default requestHandler;
