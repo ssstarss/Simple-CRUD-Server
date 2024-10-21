@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { usersDB } from './usersDB';
+import { User, usersDB } from './usersDB';
 
-export const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
+export const putHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   const userID = req.url?.slice(11);
   if (userID) {
     try {
@@ -11,10 +11,13 @@ export const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
         );
         if (!isIdUUID) throw new Error('400');
         const index = usersDB.users.findIndex((item) => item.id === userID);
+
         if (index < 0) throw new Error('404');
-        usersDB.users.splice(index, 1);
+        if (data.age) usersDB.users[index].age = data.age;
+        if (data.hobbies) usersDB.users[index].hobbies = data.hobbies;
+        if (data.username) usersDB.users[index].username = data.username;
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify('User deleted successfully'));
+        res.end(JSON.stringify(usersDB.users[index]));
       }
     } catch (err) {
       let status = 200;
@@ -33,8 +36,5 @@ export const deleteHandler = (req: IncomingMessage, res: ServerResponse) => {
       res.writeHead(status, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(message));
     }
-  } else {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(usersDB));
   }
 };

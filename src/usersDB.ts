@@ -31,5 +31,10 @@ class UsersDB {
     } else console.log('222');
     return { newUser: {}, status: 400, message: 'Request body does not contain required fields' };
   }
+
+  deleteUser(user:User){
+    
+
+  }
 }
 export const usersDB = new UsersDB();

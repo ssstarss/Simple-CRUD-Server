@@ -3,12 +3,11 @@ import { postHandler } from './postHandler';
 import { User } from './usersDB';
 import { getHandler } from './getHandler';
 import { deleteHandler } from './deleteHandler';
+import { putHandler } from './putHandler';
 
 export const requestHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   let user;
   if (req.url?.startsWith('/api/users')) {
-    
-   
     switch (req.method) {
       case 'GET': {
         getHandler(req, res);
@@ -23,7 +22,8 @@ export const requestHandler = (req: IncomingMessage, res: ServerResponse, data: 
         break;
       }
       case 'PUT': {
-        
+        putHandler(req, res, data);
+        break;
       }
     }
   } else {
