@@ -1,5 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { requestHandler } from './requestHandler';
+import * as dotenv from 'dotenv';
+dotenv.config()
 
 const server = createServer((req: IncomingMessage, res: ServerResponse) => {
   let data: string = '';
@@ -19,6 +21,6 @@ const server = createServer((req: IncomingMessage, res: ServerResponse) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000/');
+server.listen(process.env.PORT, () => {
+  console.log(`Server running on http://localhost:/${process.env.PORT}`);
 });
