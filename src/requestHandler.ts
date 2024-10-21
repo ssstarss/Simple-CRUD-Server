@@ -1,9 +1,10 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import postHandler from './postHandler';
-import { User } from './usersDB';
+
 import getHandler from './getHandler';
 import deleteHandler from './deleteHandler';
 import putHandler from './putHandler';
+import { User } from './types';
 
 const requestHandler = (req: IncomingMessage, res: ServerResponse, data: User) => {
   if (req.url?.startsWith('/api/users')) {
@@ -13,7 +14,7 @@ const requestHandler = (req: IncomingMessage, res: ServerResponse, data: User) =
         break;
       }
       case 'POST': {
-        postHandler(req, res, data);
+        postHandler(res, data);
         break;
       }
       case 'DELETE': {

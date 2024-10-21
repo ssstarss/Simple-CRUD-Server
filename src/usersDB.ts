@@ -1,9 +1,4 @@
-export type User = {
-  id: string;
-  username: string;
-  age: number;
-  hobbies: string[];
-};
+import { Resp, User } from './types';
 
 class UsersDB {
   users: User[];
@@ -12,7 +7,7 @@ class UsersDB {
     this.users = [];
   }
 
-  adduser(user: User) {
+  adduser(user: User): Resp {
     if (
       typeof user.username === 'string' &&
       typeof user.age === 'number' &&
@@ -26,9 +21,10 @@ class UsersDB {
         hobbies: user.hobbies,
       };
       this.users.push(newUser);
-      return { newUser, status: 200 };
+      return { response: newUser, status: 200 };
     }
-    return { newUser: {}, status: 400, message: 'Request body does not contain required fields' };
+    return { status: 400, response: 'Request body does not contain required fields' };
   }
 }
-export const usersDB = new UsersDB();
+const usersDB = new UsersDB();
+export default usersDB;

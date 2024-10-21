@@ -9,7 +9,7 @@
 
 ## How to use Simple-CRUD-Server App
 
-- **1** using **postman localhost:3000** and /api/users endpoint you can try following requests:
+- using **Postman with http localhost:3000** and /api/users endpoint you can try following requests:
 - **GET** `api/users` is used to get all persons
 - **GET** `api/users/{userId}` to get precious person
 - **POST** `api/users` is used to create record about new user and store it in database
@@ -23,4 +23,4 @@
    - `age` — user's age (`number`, **required**)
    - `hobbies` — user's hobbies (`array` of `strings` or empty `array`, **required**)
 
-3. Request with wrong data will ccause errors in response
+3. Request with wrong data will cause errors in response
